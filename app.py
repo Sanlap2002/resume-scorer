@@ -1,6 +1,11 @@
 import streamlit as st
+import re
 from getScore import get_similarity_score
 from getResumeText import extract_resume_text
+
+def extract_number(text, fallback=0):
+    match = re.search(r'\d+', text)
+    return int(match.group()) if match else fallback
 
 # Streamlit UI
 st.title("🧠 Resume Scoring App")
@@ -13,7 +18,8 @@ if uploaded_file and job_desc:
     if st.button("Get Score"):
         with st.spinner("Analyzing..."):
             resume_text = extract_resume_text(uploaded_file)
-            score = int(get_similarity_score(resume_text, job_desc).strip('*'))
+            raw_score = get_similarity_score(resume_text, job_desc)
+            score = extract_number(raw_score, fallback=0)  # fallback score here
 
         st.success(f"✅ Resume Match Score: **{score}/100**")
 

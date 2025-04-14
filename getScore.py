@@ -9,10 +9,10 @@ API_KEY = os.getenv("API_KEY")
 def get_similarity_score(resume_text, job_desc):
     prompt_template = Template(
         """Here's some resume text:- 
-        $rt
+        "$rt"
 
-        And here's the job description: 
-        $jd
+        And here's the job description:- 
+        "$jd"
 
         Based on the resume text, give only a numeric score out of 100 and no extra text — the answer should be only a single number between 1 and 100."""
     )
