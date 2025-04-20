@@ -19,7 +19,21 @@ job_desc = st.text_area("Paste Job Description")
 
 if uploaded_file and job_desc:
     resume_text = extract_resume_text(uploaded_file)
-    st.session_state.show_improvements = False  # reset improvements state
+    
+    # Track changes to resume file and job description
+    if "prev_file" not in st.session_state:
+        st.session_state.prev_file = None
+    if "prev_job_desc" not in st.session_state:
+        st.session_state.prev_job_desc = ""
+
+    # If file or job desc has changed, reset the score
+    if uploaded_file != st.session_state.prev_file or job_desc != st.session_state.prev_job_desc:
+        st.session_state.pop("score", None)
+        st.session_state.pop("show_improvements", None)
+
+    # Update the tracked values
+    st.session_state.prev_file = uploaded_file
+    st.session_state.prev_job_desc = job_desc
 
     if st.button("Get Score"):
         with st.spinner("Analyzing..."):
