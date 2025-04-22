@@ -4,7 +4,7 @@ from string import Template
 from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.getenv("API_KEY")
+LLM_API_KEY = os.getenv("LLM_API_KEY")
 
 def get_result(type,resume_text, job_desc):
     prompt_template=""
@@ -19,7 +19,7 @@ def get_result(type,resume_text, job_desc):
 
             Based on the resume text, give only a numeric score out of 100 and no extra text — the answer should be only a single number between 1 and 100."""
         )
-    else:
+    elif type=="improvements":
         prompt_template = Template(
             """Here's some resume text:- 
             "$rt"
@@ -29,12 +29,19 @@ def get_result(type,resume_text, job_desc):
 
             Based on the resume text, suggest me the major improvements in a concise form"""
         )
+    else:
+        prompt_template = Template(
+            """Here's some resume text:- 
+            "$rt"
+
+            Based on the resume text, ONLY give me the 15 most important keywords in a space seperated form(don't make anything bold) and not a single more word in your response otherwise my app wil break"""
+        )
 
     message = prompt_template.substitute(rt=resume_text, jd=job_desc)
 
     client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
-        api_key=API_KEY,
+        api_key=LLM_API_KEY,
     )
 
     completion = client.chat.completions.create(

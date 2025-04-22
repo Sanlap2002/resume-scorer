@@ -3,3 +3,4 @@ streamlit
 pypdf
 langchain_community
 dotenv
+requests
