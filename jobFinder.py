@@ -8,7 +8,7 @@ def run():
     set_styles("Background_Image.jpg")
     st.title("📄 Resume-Based Job Finder")
 
-    uploaded_file = st.file_uploader("Upload your resume (PDF)", type=["pdf"])
+    uploaded_file = st.file_uploader("Upload Resume (PDF)", type=["pdf"])
 
     if uploaded_file:
         resume_text = extract_resume_text(uploaded_file)
