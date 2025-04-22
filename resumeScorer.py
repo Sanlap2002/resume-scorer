@@ -12,7 +12,7 @@ def run():
         return int(match.group()) if match else fallback
 
     # --- Resume Scoring App UI ---
-    st.title("🧠 Resume Scoring App")
+    st.title("🧠 Resume Scorer")
     st.write("Upload your resume and paste a job description to see how well they match.")
 
     uploaded_file = st.file_uploader("Upload Resume (PDF)", type=["pdf"])
