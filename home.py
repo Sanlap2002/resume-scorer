@@ -18,7 +18,7 @@ with st.sidebar:
 
 # Main content
 if st.session_state.page == "Home":
-    set_styles("Background_Image.jpg")
+    # set_styles("Background_Image.jpg")
 
     st.title("🏆 Welcome to Career Assistant")
     st.markdown("Boost your career with smart tools:")
