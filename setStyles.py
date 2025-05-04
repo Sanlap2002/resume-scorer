@@ -2,12 +2,11 @@ import streamlit as st
 import base64
 
 def set_styles(jpg_file):
-    with open(jpg_file, "rb") as f:
-        base64_img = base64.b64encode(f.read()).decode()
+    # with open(jpg_file, "rb") as f:
+        # base64_img = base64.b64encode(f.read()).decode()
     css = f"""
     <style>
     .stApp {{
-        background-image: url("data:image/jpg;base64,{base64_img}");
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
